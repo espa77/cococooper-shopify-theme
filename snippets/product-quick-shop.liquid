@@ -1,0 +1,100 @@
+{% assign firstVariant = itemType.selected_or_first_available_variant %}
+{% assign firstVariantImage = firstVariant.featured_image | default: itemType.featured_image %}
+
+<div id="quick-shop-{{ itemType.id }}" class="quick-shop-content clearfix" {% if itemType.options.size == 1 %}data-option="{{ itemType.options.first | escape }}"{% endif %}>
+
+  <div class="showcase {% if itemType.images.size == 1 %}wide{% endif %}">
+    <div class="container {% if itemType.images.size == 1 or settings.product-thumb-orientation == 'below' %}wide{% endif %}">
+      <div class="wrap">
+        <img alt="{{ firstVariantImage.alt }}" src="{{ firstVariantImage | product_img_url: 'large' }}">
+        {% if settings.product-image-borders %}<span class="overlay"></span>{% endif %}
+      </div>
+    </div>
+
+    {% if itemType.images.size > 1 %}
+      <div class="pager {% if settings.product-thumb-orientation == 'below' %}below-main-image{% endif %}">
+        <div class="inner">
+          {% for image in itemType.images %}
+            <div class="wrap thumb {% include 'for-looper' %} {% if forloop.first %}active{% endif %}">
+              <img alt="{{ image.alt }}" src="{{ image.src | product_img_url: 'small' }}" data-high-res-url="{{ image.src | product_img_url: 'large' }}">
+              <span class="overlay"></span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if settings.display-product-email-link %}<div class="notes"><a href="mailto:{{ shop.email }}?subject={{ itemType.title | escape }}" class="email-us"><span class="icon">j</span>{{ 'products.product.email_us' | t }}</a></div>{% endif %}
+  </div>
+
+  <div class="product-details-wrapper {% if itemType.variants.size == 1 and settings.display-product-quantity-option == false %}no-options{% endif %}">
+
+    <div class="module header">
+      <span class="close-modal">v</span>
+      {% if settings.show-brand-names %}
+        <p class="brand">{{ itemType.vendor }}</p>
+      {% endif %}
+      <p class="title"><a href="{{ itemType.url }}">{{ itemType.title }}</a></p>
+      {% if itemType.compare_at_price_min > itemType.price_min %}
+        <p class="price sale"><span class="original money">{{ itemType.compare_at_price_min | money }}</span> <span class="money">{{ itemType.price_min | money }}</span></p>
+      {% else %}
+        <p class="price"><span class="money">{{ itemType.price_min | money }}</span></p>
+      {% endif %}
+    </div>
+
+    <form class="module options quick-shop-form {% unless itemType.available %}unavailable{% endunless %}" action="/cart/add" method="post" id="quick-shop-form-{{ itemType.id }}" data-product-id="{{ itemType.id }}">
+
+      {% if itemType.available %} <!-- If the product is available then... -->
+
+        {% if itemType.variants.size > 1 or itemType.variants.first.title != "Default Title" %}
+
+          <select name="id" id="product-select-{{ itemType.id }}" class="product-select">
+            {% for variant in itemType.variants %}
+              <option{% if variant == firstVariant %} selected{% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+            {% endfor %}
+          </select>
+
+        {% else %} <!-- If the product only has one variant, create a hidden input with the variant id. NOTE: Necessary for "add to cart" to work -->
+
+          <input type="hidden" name="id" class="product-select" value="{{ firstVariant.id }}" data-variant-title="{{ firstVariant.title }}" />
+
+        {% endif %}
+
+        {% if settings.display-product-quantity-option %}
+          <div class="selector-wrapper">
+            <label>{{ 'general.quantity' | t }}</label>
+            <input type="text" name="quantity" class="product-quantity field" value="1">
+          </div>
+        {% else %}
+          <input type="hidden" name="quantity" class="product-quantity field" value="1">
+        {% endif %}
+
+        <div class="selector-wrapper">
+          {% if itemType.options.size > 1 %}<label></label>{% endif %}
+          <input class="action-button submit" type="submit" value="{{ 'products.product.add_to_cart' | t }}" />
+        </div>
+
+        <div class="error-wrap"></div>
+
+      {% else %}
+
+        <span class="action-button unavailable disabled">{{ 'products.product.sold_out' | t }}</span>
+
+      {% endif %}
+
+    </form>
+
+    <div class="module description">
+      {% if itemType.description.size > 0 %}
+        <div class="rte special">{{ itemType.description }}</div>
+      {% endif %}
+      <a class="go-to-product" href="{{ itemType.url }}">{{ 'products.product.visit_page' | t }} <span>→</span></a>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  Theme.products["{{ itemType.id }}"] = {{ itemType | json }};
+</script>

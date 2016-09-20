@@ -1,0 +1,178 @@
+
+<!-- Mobile navigation
+============================================= -->
+<section class="mobile-dropdown {{ settings.mobile-navigation-colour-scheme }}">
+  <ul class="list primary">
+    {% for link in linklists.main-menu.links %}
+
+      {% capture link_handle %}{{ link.title | handle }}{% endcapture %}
+
+      {% capture link_title %}
+        {% if link.title == 'Catalog' and settings.catalog-label-override.size > 0 %}
+          {{ settings.catalog-label-override }}
+        {% else %}
+          {{ link.title }}
+        {% endif %}
+      {% endcapture %}
+
+      {% assign meganav = false %}
+      {% if link.title == 'Catalog' and settings.enable-mega-nav %} {% assign meganav = true %} {% endif %}
+
+      {% assign dropdown = false %}
+      {% if linklists[link_handle] and linklists[link_handle].links.size > 0 %} {% assign dropdown = true %} {% endif %}
+
+      <li class="list-item {% include 'for-looper' %} {% if meganav or dropdown %}dropdown{% endif %}">
+        <a href="{{ link.url }}">{{ link_title }}{% if meganav or dropdown %}<span class="icon"></span>{% endif %}</a>
+
+        {% if meganav %}
+
+          <ul class="list secondary">
+
+            {% if linklists[settings.meganav-list-1].title.size > 0 %}
+              <li class="list-item dropdown">
+                <a href="{{ linklists[settings.meganav-list-1].url }}">{{ linklists[settings.meganav-list-1].title }}<span class="icon"></span></a>
+                <ul class="list tertiary">
+                  {% for link_tertiary in linklists[settings.meganav-list-1].links %}
+
+                    {% assign dropdown = false %}
+                    {% capture link_handle_tertiary %}{{ link_tertiary.title | handle }}{% endcapture %}
+                    {% if linklists[link_handle_tertiary] and linklists[link_handle_tertiary].links.size > 0 %}{% assign dropdown = true %}{% endif %}
+
+                    <li class="list-item {% if dropdown %}dropdown{% endif %}">
+                      <a href="{{ link_tertiary.url }}">{{ link_tertiary.title }}{% if dropdown %}<span class="icon"></span>{% endif %}</a>
+
+                      {% if dropdown %}
+                      <ul class="list quaternary">
+                        {% for link_quaternary in linklists[link_handle_tertiary].links %}
+                          <li class="list-item">
+                            <a href="{{ link_quaternary.url }}">{{ link_quaternary.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+
+                    </li>
+
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+
+            {% if linklists[settings.meganav-list-2].title.size > 0 %}
+              <li class="list-item dropdown">
+                <a href="{{ linklists[settings.meganav-list-2].url }}">{{ linklists[settings.meganav-list-2].title }}<span class="icon"></span></a>
+                <ul class="list tertiary">
+                  {% for link_tertiary in linklists[settings.meganav-list-2].links %}
+
+                    {% assign dropdown = false %}
+                    {% capture link_handle_tertiary %}{{ link_tertiary.title | handle }}{% endcapture %}
+                    {% if linklists[link_handle_tertiary] and linklists[link_handle_tertiary].links.size > 0 %}{% assign dropdown = true %}{% endif %}
+
+                    <li class="list-item {% if dropdown %}dropdown{% endif %}">
+                      <a href="{{ link_tertiary.url }}">{{ link_tertiary.title }}{% if dropdown %}<span class="icon"></span>{% endif %}</a>
+
+                      {% if dropdown %}
+                      <ul class="list quaternary">
+                        {% for link_quaternary in linklists[link_handle_tertiary].links %}
+                          <li class="list-item">
+                            <a href="{{ link_quaternary.url }}">{{ link_quaternary.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+
+                    </li>
+
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+
+            {% if linklists[settings.meganav-list-3].title.size > 0 %}
+              <li class="list-item dropdown">
+                <a href="{{ linklists[settings.meganav-list-3].url }}">{{ linklists[settings.meganav-list-3].title }}<span class="icon"></span></a>
+                <ul class="list tertiary">
+                  {% for link_tertiary in linklists[settings.meganav-list-3].links %}
+
+                    {% assign dropdown = false %}
+                    {% capture link_handle_tertiary %}{{ link_tertiary.title | handle }}{% endcapture %}
+                    {% if linklists[link_handle_tertiary] and linklists[link_handle_tertiary].links.size > 0 %}{% assign dropdown = true %}{% endif %}
+
+                    <li class="list-item {% if dropdown %}dropdown{% endif %}">
+                      <a href="{{ link_tertiary.url }}">{{ link_tertiary.title }}{% if dropdown %}<span class="icon"></span>{% endif %}</a>
+
+                      {% if dropdown %}
+                      <ul class="list quaternary">
+                        {% for link_quaternary in linklists[link_handle_tertiary].links %}
+                          <li class="list-item">
+                            <a href="{{ link_quaternary.url }}">{{ link_quaternary.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+
+                    </li>
+
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+
+          </ul>
+
+        {% endif %}
+
+        {% if dropdown %}
+
+          <ul class="list secondary">
+            {% for link_secondary in linklists[link_handle].links %}
+
+              {% capture link_handle_secondary %}{{ link_secondary.title | handle }}{% endcapture %}
+              {% assign dropdown = false %}
+              {% if linklists[link_handle_secondary] and linklists[link_handle_secondary].links.size > 0 %} {% assign dropdown = true %} {% endif %}
+
+              <li class="list-item {% if dropdown %}dropdown{% endif %}">
+                <a href="{{ link_secondary.url }}">{{ link_secondary.title }}{% if dropdown %}<span class="icon"></span>{% endif %}</a>
+
+                {% if dropdown %}
+
+                  <ul class="list tertiary">
+                    {% for link_tertiary in linklists[link_handle_secondary].links %}
+
+                      {% capture link_handle_tertiary %}{{ link_tertiary.title | handle }}{% endcapture %}
+                      {% assign dropdown = false %}
+                      {% if linklists[link_handle_tertiary] and linklists[link_handle_tertiary].links.size > 0 %} {% assign dropdown = true %} {% endif %}
+
+                      <li class="list-item {% if dropdown %}dropdown{% endif %}">
+                        <a href="{{ link_tertiary.url }}">{{ link_tertiary.title }} {% if dropdown %}<span class="icon"></span>{% endif %}</a>
+
+                        {% if dropdown %}
+
+                          <ul class="list quaternary">
+                            {% for link_quaternary in linklists[link_handle_tertiary].links %}
+                              <li class="list-item">
+                                <a href="{{ link_quaternary.url }}">{{ link_quaternary.title }}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+
+                {% endif %}
+
+              </li>
+
+            {% endfor %}
+          </ul>
+
+        {% endif %}
+
+      </li>
+
+    {% endfor %}
+    <li class="list-item" id="coin-container"></li>
+  </ul>
+</section>

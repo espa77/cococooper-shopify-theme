@@ -1,0 +1,96 @@
+
+<!-- Full navigation
+============================================= -->
+<nav class="full es-header
+  {% unless template == 'index' and settings.show-slideshow == true and settings.slideshow-full-width %}
+    bordered
+  {% endunless %}
+  {% unless settings.header-format == 'minimal' %}
+    header-non-stick
+  {% endunless %}
+  {{ settings.mobile-navigation-colour-scheme }}">
+  {% unless settings.center-header or settings.header-format == 'minimal' %}<div class="content-area">{% endunless %}
+
+  <!-- Main nav
+  ++++++++++++++++++++++++++++ -->
+  <ul id="left-navigation">
+
+    {% for link in linklists.main-menu.links %}<li class="nav-item {% include 'for-looper' %} {% if link.title == 'Catalog' and settings.enable-mega-nav %}has-mega-nav{% endif %} {% capture link_handle %}{{ link.title | handle }}{% endcapture %}  {% if linklists[link_handle] and linklists[link_handle].links.size > 0 %}dropdown{% endif %}">
+
+      {% capture link_title %}
+        {% if link.title == 'Catalog' and settings.catalog-label-override.size > 0 %}
+          {{ settings.catalog-label-override }}
+        {% else %}
+          {{ link.title }}
+        {% endif %}
+      {% endcapture %}
+
+      {% assign meganav = false %}
+      {% if link.title == 'Catalog' and settings.enable-mega-nav %} {% assign meganav = true %} {% endif %}
+
+      {% assign dropdown = false %}
+      {% if meganav == false and linklists[link_handle] and linklists[link_handle].links.size > 0 %} {% assign dropdown = true %} {% endif %}
+
+        {% if dropdown or meganav %}<span class="border"></span>{% endif %}
+        <a class="label" href="{{ link.url }}">{{ link_title }}{% if dropdown or meganav %}<span class="icon"><</span>{% endif %}</a>
+
+        {% if dropdown %}
+
+          <!-- Simple dropdown: primary
+          ++++++++++++++++++++++++++++ -->
+          <ul class="dropdown-wrap primary">
+            {% for link_primary in linklists[link_handle].links %}
+
+              {% capture link_handle_primary %}{{ link_primary.title | handle }}{% endcapture %}
+              {% assign dropdown = false %}
+              {% if linklists[link_handle_primary] and linklists[link_handle_primary].links.size > 0 %} {% assign dropdown = true %} {% endif %}
+
+              <li class="dropdown-item {% include 'for-looper' %}">
+                <a href="{{ link_primary.url }}"><span class="label">{{ link_primary.title }}</span>{% if dropdown %}<span class="icon">></span>{% endif %}</a>
+
+                {% if dropdown %}
+
+                  <!-- Simple dropdown: secondary
+                  ++++++++++++++++++++++++++++ -->
+                  <ul class="dropdown-wrap child secondary right">
+                    {% for link_secondary in linklists[link_handle_primary].links %}
+
+                      {% capture link_handle_secondary %}{{ link_secondary.title | handle }}{% endcapture %}
+                      {% assign dropdown = false %}
+                      {% if linklists[link_handle_secondary] and linklists[link_handle_secondary].links.size > 0 %} {% assign dropdown = true %} {% endif %}
+
+                      <li class="dropdown-item {% include 'for-looper' %}">
+                        <a href="{{ link_secondary.url }}"><span class="label">{{ link_secondary.title }}</span>{% if dropdown %}<span class="icon">></span>{% endif %}</a>
+
+                        {% if dropdown %}
+
+                          <!-- Simple dropdown: tertiary
+                          ++++++++++++++++++++++++++++ -->
+                          <ul class="dropdown-wrap child tertiary right">
+                            {% for link_tertiary in linklists[link_handle_secondary].links %}
+                              <li class="dropdown-item {% include 'for-looper' %}"><a href="{{ link_tertiary.url }}"><span class="label">{{ link_tertiary.title }}</span></a></li>
+                            {% endfor %}
+                          </ul>
+                          <!-- ++++++++++++++++++++++++++++ -->
+
+                        {% endif %}
+                      </li>
+
+                    {% endfor %}
+                  </ul>
+                  <!-- ++++++++++++++++++++++++++++ -->
+
+                {% endif %}
+              </li>
+
+            {% endfor %}
+          </ul>
+          <!-- ++++++++++++++++++++++++++++ -->
+
+        {% endif %}
+    </li>{% endfor %}
+  </ul>
+  <!-- ++++++++++++++++++++++++++++ -->
+  {% unless settings.center-header  or settings.header-format == 'minimal' %}</div>{% endunless %}
+
+</nav>

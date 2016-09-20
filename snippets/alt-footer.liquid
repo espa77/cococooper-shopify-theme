@@ -1,0 +1,79 @@
+<!-- Footer
+============================================= -->
+{% assign footerModules = 1 %}
+{% capture enabled %}show-slide-{{i}}{% endcapture %}
+{% capture link %}slide-link-{{i}}{% endcapture %}
+{% capture button %}slide-button-{{i}}{% endcapture %}
+
+{% if settings.footer-secondary-menu != blank %}
+  {% assign footerModules = footerModules | plus: 1 %}
+{% endif %}
+
+{% if settings.footer-message != blank or settings.show-mailing-list and settings.mailchimp-action-url != blank %}
+  {% assign footerModules = footerModules | plus: 1 %}
+{% endif %}
+
+<footer class="main-footer main-footer-alt content-area" id="main-footer">
+  <div id="es-footer">
+  <div id="es-footer-image">
+    <img src="https://cdn.shopify.com/s/files/1/1471/3304/files/Coco-footer.jpg?3108991007957911344" alt="cococooper jeans woman on fire escape" />
+  </div>
+
+  <!-- Connect with us
+  ++++++++++++++++++++++++++++ -->
+  <ul class="es-footer-item connect clearfix module-count-{{ footerModules }}">
+    {% if settings.show-mailing-list and settings.mailchimp-action-url != blank %}
+      <li class="first newsletter">
+        {% if settings.footer-message != blank %}
+          <div class="footer-message coco-footer-message">{{ settings.footer-message }}</div>
+        {% endif %}
+        <form action="{{ settings.mailchimp-action-url }}" method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+          <div class="wrap">
+            <input class="email" name="EMAIL" type="email" placeholder="{{ 'layout.footer.email' | t }}" value="">
+            <input class="submit" name="subscribe" type="submit" value="{{ 'general.submit' | t }}">
+          </div>
+        </form>
+      </li>
+    {% elsif settings.footer-message != blank %}
+      <li class="first newsletter">
+        <div class="footer-message">{{ settings.footer-message }}</div>
+          <a class="call-to-action" href="/collections/all">shop now</a>
+      </li>
+    {% endif %}
+
+    {% if settings.footer-secondary-menu != "" %}
+      <li class="footer-menu">
+        <ul class="footer-linklist-one">
+          {% for link in linklists[settings.footer-secondary-menu].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endif %}
+
+  </ul>
+</div>
+
+  <!-- Sub-footer
+  ++++++++++++++++++++++++++++ -->
+  <div class="sub-footer">
+
+    {% unless settings.twitter-url.size == 0 and settings.facebook-url.size == 0 and settings.pinterest-url.size == 0 and settings.google-plus-url.size == 0 and settings.instagram-url.size == 0 and settings.tumblr-url.size == 0 and settings.youtube-url.size == 0 and settings.vimeo-url.size == 0 %}
+      <nav class="social">
+        {% include 'social-links' %}
+      </nav>
+    {% endunless %}
+
+    {% if shop.enabled_payment_types.size > 0 and settings.footer-payment-options %}
+      {% include 'icon-sprite.svg' %}
+      <ul class="payment-options">
+        {% for type in shop.enabled_payment_types %}
+          <li class="{{ type | replace: '_','-' }}">
+            <svg><use xlink:href="#payment-{{ type }}"/></svg>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+</footer>

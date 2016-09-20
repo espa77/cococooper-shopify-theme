@@ -1,0 +1,78 @@
+<!-- Footer
+============================================= -->
+{% assign footerModules = 0 %}
+
+{% if settings.footer-message != blank %}
+  {% assign footerModules = footerModules | plus: 1 %}
+{% endif %}
+
+{% unless settings.twitter-url.size == 0 and settings.facebook-url.size == 0 and settings.pinterest-url.size == 0 and settings.instagram-url.size == 0 %}
+  {% assign footerModules = footerModules | plus: 1 %}
+{% endunless %}
+
+{% if settings.show-mailing-list and settings.mailchimp-action-url != blank %}
+  {% assign footerModules = footerModules | plus: 1 %}
+{% endif %}
+
+<footer class="main-footer content-area" id="main-footer">
+
+  <!-- Connect with us
+  ++++++++++++++++++++++++++++ -->
+  <ul class="connect clearfix module-count-{{ footerModules }}">
+    {% if settings.footer-message != blank %}
+      <li class="contact first">
+
+        <div class="footer-message">{{ settings.footer-message }}
+          <a class="call-to-action" href="">
+        </div>
+
+      </li>
+    {% endif %}
+
+    {% unless settings.twitter-url.size == 0 and settings.facebook-url.size == 0 and settings.pinterest-url.size == 0 and settings.google-plus-url.size == 0 and settings.instagram-url.size == 0 and settings.tumblr-url.size == 0 and settings.youtube-url.size == 0 and settings.vimeo-url.size == 0 %}
+      <li class="social">
+        <h2 class="title">{{ 'layout.footer.social_title' | t }}</h2>
+        {% include 'social-links' %}
+      </li>
+    {% endunless %}
+
+    {% if settings.show-mailing-list and settings.mailchimp-action-url != blank %}
+      <li class="newsletter">
+        <h2 class="title">{{ 'layout.footer.newsletter_title' | t }}</h2>
+        <form action="{{ settings.mailchimp-action-url }}" method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+          <div class="wrap">
+            <input class="email" name="EMAIL" type="email" placeholder="{{ 'layout.footer.email' | t }}" value="">
+            <input class="submit" name="subscribe" type="submit" value="{{ 'general.submit' | t }}">
+          </div>
+        </form>
+      </li>
+    {% endif %}
+  </ul>
+
+  <!-- Sub-footer
+  ++++++++++++++++++++++++++++ -->
+  <div class="sub-footer">
+    {% if linklists.footer.links.size > 0 %}
+    <nav class="footer-nav">
+      <ul>
+        {% for link in linklists.footer.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}
+    <p><a href="http://www.pixelunion.net/themes/shopify/atlantic">Atlantic Theme</a> by <a href="http://www.pixelunion.net">Pixel Union</a>. {{ powered_by_link }}.</p>
+
+    {% if shop.enabled_payment_types.size > 0 and settings.footer-payment-options %}
+      {% include 'icon-sprite.svg' %}
+      <ul class="payment-options">
+        {% for type in shop.enabled_payment_types %}
+          <li class="{{ type | replace: '_','-' }}">
+            <svg><use xlink:href="#payment-{{ type }}"/></svg>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+</footer>

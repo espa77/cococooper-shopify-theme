@@ -1,0 +1,5 @@
+<ul class="tags">
+  {% for tag in collection.all_tags %}
+    <li class="tag show">{{ tag | link_to_tag: tag }}</li>
+  {% endfor %}
+</ul>

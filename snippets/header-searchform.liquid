@@ -1,0 +1,8 @@
+{% unless settings.center-header %}<div class="content-area search-wrap-contained">{% endunless %}
+  <div class="search-wrap full">
+    <form action="/search" method="get">
+      <input class="search-input" name="q" type="text" placeholder="{{ 'general.search_placeholder' | t }}" value="">
+      {% include 'icon' with 'search' %}
+    </form>
+  </div>
+{% unless settings.center-header %}</div>{% endunless %}

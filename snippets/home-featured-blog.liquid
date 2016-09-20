@@ -1,0 +1,26 @@
+{% assign positionClass = '' %}
+{% if settings.display-welcome-message == false and settings.display-featured-collections == false and settings.display-featured-products == false %}
+  {% assign positionClass = 'first' %}
+{% endif %}
+
+<!-- Featured blog
+============================================= -->
+<section class="blog {{ positionClass }} content-area">
+  <h2 class="section-title section-border">{{ 'home_page.featured_blog.title' | t }}</h2>
+  {% if blogs.[settings.featured-blog].articles.size > 0 %}
+  <ul class="articles">
+    {% for article in blogs.[settings.featured-blog].articles limit: 4 %}<li class="article {% include 'for-looper' %}">
+      <a class="date" href="{{ article.url }}">{{ article.published_at | date: format: 'full_month' }}</a>
+      <a class="title" href="{{ article.url }}">{{ article.title }}</a>
+      <div class="rte content">
+        {% if article.image %}
+          <a href="{{ article.url }}" class="article-image image-wrap">
+            <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
+          </a>
+        {% endif %}
+        {{ article.excerpt_or_content }}
+      </div>
+    </li>{% endfor %}
+  </ul>
+  {% endif %}
+</section>

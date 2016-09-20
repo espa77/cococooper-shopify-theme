@@ -1,0 +1,100 @@
+{% if settings.show-slideshow %}
+<section class="slideshow {% if settings.slideshow-full-width == false %}content-area{% endif %} clearfix">
+  {% for i in (1..5) %}
+
+    {% capture enabled %}show-slide-{{i}}{% endcapture %}
+    {% capture invert %}invert-controls-slide-{{i}}{% endcapture %}
+    {% capture position %}slide-position-{{i}}{% endcapture %}
+    {% capture title %}slide-title-{{i}}{% endcapture %}
+    {% capture tagline %}slide-tagline-{{i}}{% endcapture %}
+    {% capture button %}slide-button-{{i}}{% endcapture %}
+    {% capture link %}slide-link-{{i}}{% endcapture %}
+
+    {% if settings[enabled] %}
+      <div class="slide {% if settings[invert] %}invert{% endif %}">
+        <div class="image-wrap">
+          <span class="prev"><span class="icon">[</span></span>
+          <span class="next"><span class="icon">]</span></span>
+          <ul class="jump-to-slide"></ul>
+
+          {% if settings[link] != blank %}
+            <a href="{{ settings[link] }}">
+              <img alt="{{ settings[title] }}" src="{{ 'slide-image-' | append: i | append: '.jpg' | asset_url }}">
+            </a>
+          {% else %}
+            <img alt="{{ settings[title] }}" src="{{ 'slide-image-' | append: i | append: '.jpg' | asset_url }}">
+          {% endif %}
+        </div>
+
+        {% if settings[title] != blank or settings[tagline] != blank or settings[button] != blank %}
+          <div class="content-outer-wrap">
+            <a class="mobile-link" href="{{ settings[link] }}"></a>
+            <div class="content-inner-wrap">
+              <div class="content {{ settings[position] }}">
+                {% if settings[title] != blank %}
+                  <h2 class="title">{{ settings[title] }}</h2>
+                {% endif %}
+                {% if settings[tagline] != blank %}
+                  <h3 class="tagline">{{ settings[tagline] }}</h3>
+                {% endif %}
+                {% if settings[button] != blank and settings[link] != blank %}
+                  <a class="call-to-action" href="{{ settings[link] }}">
+                    {{ settings[button] }} <span class="arrow">></span>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    {% endif %}
+
+  {% endfor %}
+</section>
+{% endif %}
+
+<main>
+
+  {% assign homeModules = '' %}
+  {% for i in (1..11) %}
+    {% capture module %}home-module-{{ i }}{% endcapture %}
+    {% unless settings[module] == 'none' or homeModules contains settings[module] %}
+      {% capture homeModules %}{{ homeModules }}-{{ settings[module] }}{% endcapture %}
+    {% endunless %}
+  {% endfor %}
+
+  {% assign homeModules = homeModules | remove_first: '-' | split: '-' %}
+
+  {% if homeModules != blank %}
+    {% for homeModule in homeModules %}
+      {% case homeModule %}
+        {% when 'A' %}
+          {% include 'home-welcome-message' %}
+        {% when 'B' %}
+          {% include 'home-featured-collections' %}
+        {% when 'C' %}
+          {% include 'home-featured-products' %}
+        {% when 'D' %}
+          {% include 'home-featured-blog' %}
+        {% when 'E' %}
+          {% include 'home-as-seen-on' %}
+        {% when 'F' %}
+          {% include 'home-instagram-widget' %}
+        {% when 'G' %}
+          {% include 'home-twitter-widget' %}
+        {% when 'H' %}
+          {% include 'home-video' %}
+        {% when 'I' %}
+        <div class="es-pictureblock">
+          {% include 'home-pictureblock' with 'one' %}
+        {% when 'J' %}
+          {% include 'home-pictureblock' with 'two' %}
+        </div>
+      {% endcase %}
+    {% endfor %}
+  {% elsif settings.show-slideshow != true %}
+    {% include 'home-onboarding' %}
+  {% endif %}
+
+</main>

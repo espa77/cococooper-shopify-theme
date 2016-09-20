@@ -1,0 +1,22 @@
+{% if settings.home-video-embed != blank and settings.enable-video %}
+  <div class="home-module home-video text-color-{{ settings.home-video-text-color }}">
+    <div class="home-module-content">
+      <div class="home-video-play play-button-{{ settings.home-video-play-button-color }}"></div>
+
+      <div class="home-video-embed-wrapper">
+        <div class="home-video-embed">
+          {{ settings.home-video-embed }}
+        </div>
+      </div>
+
+      <div class="home-video-screenshot">
+        <span class="home-video-play-button mobile meta">{{ 'home_page.video_button_text' | t }}</span>
+        <img alt="{{ 'home_page.video_button_text' | t }}" src="{{ 'home-video-screenshot.png' | asset_url }}">
+      </div>
+
+      <div class="home-video-content rte">
+        <span class="home-video-play-button meta">{% include 'icon' with 'playvideo' %}</span>
+      </div>
+    </div>
+  </div>
+{% endif %}

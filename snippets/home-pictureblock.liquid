@@ -1,0 +1,36 @@
+{% comment %} Asign some partial variables {% endcomment %}
+{% capture enabled %}pictureblock-{{ home-pictureblock }}-enabled{% endcapture %}
+{% capture aligned %}pictureblock-{{ home-pictureblock }}-align{% endcapture %}
+{% capture heading %}pictureblock-{{ home-pictureblock }}-heading{% endcapture %}
+{% capture body %}pictureblock-{{ home-pictureblock }}-body{% endcapture %}
+{% capture theme_settings_link %}
+  <a href="/admin/themes">{{ 'onboarding.theme_settings_link' | t }}</a>
+{% endcapture %}
+
+{% if settings[enabled] %}
+  <!-- Picture block {{ home-pictureblock }}
+  ============================================= -->
+  <section class="clearfix picture-block picture-block-{{ settings[aligned] }}">
+
+    <div class="picture-block-image" style="background-image: url('{{ "pictureblock-" | append: home-pictureblock | append: "-image.png" | asset_url }}')">
+      <img src="{{ 'pictureblock-' | append: home-pictureblock | append: '-image.png' | asset_url }}" alt="{{ settings[heading] }}">
+    </div>
+
+    {% if settings[heading] != blank or settings[content] != blank %}
+      <div class="picture-block-wrapper">
+        <div class="centering-wrapper">
+          <div class="picture-block-content">
+            {% if settings[heading] %}
+              <h2 class="picture-block-heading">{{ settings[heading] }}</h2>
+            {% endif %}
+
+            {% if settings[body] %}
+              <p class="picture-block-body">{{ settings[body] }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </section>
+{% endif %}

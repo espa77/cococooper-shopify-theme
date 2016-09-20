@@ -1,0 +1,36 @@
+<header class="main-header-wrap{% if settings.header-format == 'minimal' %} main-header-slim{% else %} main-header-nonstick{% endif %}">
+
+  <section class="main-header{% if settings.header-format == 'expanded' %} header-social-links{% endif %}">
+    {% unless settings.header-format == 'minimal' %}
+      {% include 'header-fullnav' %}
+    {% else %}
+      {% include 'header-minimal' %}
+    {% endunless %}
+
+    {% include 'header-compactnav' %}
+
+    {% if settings.enable-mega-nav %}
+      {% include 'header-meganav' %}
+    {% endif %}
+
+    {% include 'header-searchform' %}
+
+    <!-- Action links
+    ============================================= -->
+    <div class="action-links clearfix{% unless settings.center-header %} content-area{% endunless %}">
+      {% unless settings.center-header %}
+        {% if settings.header-format == 'expanded' %}{% include 'social-links' %}{% endif %}
+      {% endunless %}
+
+      {% unless settings.header-format == 'minimal' %}
+        {% include 'header-tools' %}
+        {% include 'header-storetitle' %}
+      {% endunless %}
+
+    </div>
+
+    </div>
+
+  </section>
+
+</header>
