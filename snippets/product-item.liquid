@@ -1,19 +1,19 @@
 {% if settings.enable-alt-product-card %}
   {% capture cardType %} product-card-alt{% endcapture %}
-{% endif %} 
+{% endif %}
 
 <li {% assign itemType = product %}
   {% if template contains 'search' %}
     {% assign itemType = item %}
   {% elsif template contains 'product' %}
     {% assign itemType = prod %}
-  {% endif %} 
+  {% endif %}
   class="product product-{{ itemType.id }} {% include 'for-looper' %} {% cycle 'flush', '', '', '' %}">
 
   {% if settings.products-per-row == 'two' and template == 'collection' %}
     {% assign productImageSize = '1024x1024' %}
   {% else %}
-    {% assign productImageSize = 'grande' %}
+    {% assign productImageSize = 'original' %}
   {% endif %}
 
   <div class="product-inner{{ cardType }}">

@@ -753,7 +753,7 @@ html{
     font-family: $title-font;
     color: $title-color;
 
-    
+
 
     a { color: $title-color; }
 
@@ -2173,7 +2173,7 @@ nav.compact.dark {
     font-size:12px;
     color: $theme-detail-link-color;
 
-    @include breakpoint(small) { text-align:center }
+    @include breakpoint(small) { }
 
     nav {
       text-align: center;
@@ -2983,7 +2983,7 @@ table.mobile-layout {
       font-size: 21px;
       font-family: $title-font;
 
-      
+
 
       &.preload { visibility:hidden; }
     }
@@ -3221,7 +3221,7 @@ table.mobile-layout {
     font-family: $title-font;
     margin:10px 0 0;
 
-    
+
 
     a {
       color: $title-color;
@@ -4390,7 +4390,7 @@ https://apps.shopify.com/coin
       font-family: $title-font;
       margin-bottom:12px;
 
-      
+
     }
 
     .email {
@@ -4500,7 +4500,7 @@ https://apps.shopify.com/coin
       font-family: $title-font;
       margin:0 0 25px;
 
-      
+
 
       .default {
         font-size: 12px;
@@ -4950,7 +4950,7 @@ https://apps.shopify.com/coin
           font-weight: 700;
           line-height: 1.2;
 
-          
+
         }
 
         a:hover {
@@ -5425,7 +5425,7 @@ https://apps.shopify.com/coin
       display: inline;
       white-space: normal;
 
-      
+
 
       @include breakpoint(small) {
         display: block;
@@ -6635,7 +6635,7 @@ https://apps.shopify.com/coin
       font-family: $title-font;
       text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 
-      
+
 
       @include breakpoint(small) {
         font-size:36px;
@@ -6644,7 +6644,7 @@ https://apps.shopify.com/coin
         text-shadow: none;
         padding-top:3.5em;
 
-        
+
       }
       @include breakpoint(phone) { font-size:21px; }
     }
@@ -6736,12 +6736,12 @@ https://apps.shopify.com/coin
       font-family: $title-font;
       line-height: 33px;
 
-      
+
 
       @include breakpoint(small) {
         font-size:21px;
 
-        
+
       }
     }
 
@@ -6873,7 +6873,7 @@ https://apps.shopify.com/coin
       margin-bottom:18px;
       color: $title-color;
 
-      
+
 
       &:hover { color: $accent-color; }
     }
@@ -7115,7 +7115,7 @@ https://apps.shopify.com/coin
       font-family: $title-font;
       margin-bottom:10px;
 
-      
+
     }
 
     .address, .city, .country { display:block; }
@@ -7271,7 +7271,7 @@ https://apps.shopify.com/coin
     @include breakpoint(small) { padding-top:0; padding-bottom:50px; }
   }
 
-  
+
     .text-content {
       float:left;
       width:68.5714%;
@@ -7283,7 +7283,7 @@ https://apps.shopify.com/coin
         padding-right:0px;
       }
     }
-  
+
 
   .sidebar {
     float:right;
