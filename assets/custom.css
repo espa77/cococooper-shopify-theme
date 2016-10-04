@@ -55,8 +55,9 @@
 }
 
 .footer-message, .call-to-action {
-  padding-top:3px;
-  padding-bottom:3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 12px;
 }
 
 .es-pictureblock {
@@ -152,8 +153,12 @@
   text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 
+.footer-linklist-one li {
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
+}
+
 .main-footer {
-  background-color: #3fa7fb;
+  background-color: #DCDCDC;
 }
 
 .es-sub-footer {
@@ -169,6 +174,7 @@
   font-size: 13px;
   color: #EEE;
   font-weight: 400;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 
 .footer-menu {
@@ -182,7 +188,7 @@
 
 .hidden-name {
   font-size: 1px;
-  color: #3fa7fb;
+  color: #DCDCDC;
 }
 
 a[href^="mailto:"]:before {
@@ -211,8 +217,9 @@ a[href^="tel:"] {
 }
 
 .clear > .call-to-action {
-  margin:0;
-  float:right;
+  margin-top: -12px;
+  float: right;
+  margin-right: 20px;
 }
 
 .email-field {
@@ -221,34 +228,41 @@ a[href^="tel:"] {
 
 #mc_embed_signup_scroll ul li {
   line-height:5em!important;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 
 #mc_embed_signup_scroll ul li label {
     color:#EEE;
+
 }
 
-input[type=email] {
+input[type="email"] {
     border: none;
+    color: #FFF;
     border-bottom: 2px solid #EEE;
     width: 57%;
     padding-top: 0.6vh;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+input[type="email"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-style: italic;
-  color:#EEE;
+  color:#FFF!important;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 ::-moz-placeholder { /* Firefox 19+ */
   font-style: italic;
-  color:#EEE;
+  color:#FFF!important;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 :-ms-input-placeholder { /* IE 10+ */
   font-style: italic;
-  color:#EEE;
+  color:#FFF!important;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 :-moz-placeholder { /* Firefox 18- */
   font-style: italic;
-  color:#EEE;
+  color:#FFF!important;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.33);
 }
 
 input:invalid, textarea:invalid {
@@ -271,7 +285,6 @@ input:invalid, textarea:invalid {
 
 .about-the-fit-header-image img {
   min-height:100%;
-  min-width: 1024px;
   width: 100%;
   height: auto;
   position: fixed;
@@ -337,8 +350,8 @@ input:invalid, textarea:invalid {
 
 .about-the-fit-text-block {
   text-align: center;
-  padding-left: 8vmax;
-  padding-right: 8vmax;
+  padding-left: 200px;
+  padding-right: 200px;
   max-width: 1430px;
   margin: 0 auto;
 }
@@ -350,9 +363,106 @@ input:invalid, textarea:invalid {
   margin-top: 2em;
 }
 
+.about-the-brand {
+  width:100%;
+  padding:0!important;
+}
+
+.about-the-brand-page > .content-area {
+  max-width: inherit;
+  width: 100%;
+}
+
+.about-the-brand .text-content-wrap {
+  padding-top:0;
+}
+
+.about-the-brand-header-image img {
+  min-height:100%;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top:0;
+  left:0;
+  text-align:center;
+}
+
+.about-the-brand-image-block {
+  width: 100%;
+}
+
+.about-the-brand-header-image-text {
+  text-align: center;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding-right: 8%;
+  padding-left: 8%;
+}
+
+.about-the-brand-circular-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  max-width: 1490px;
+  margin: 0 auto;
+}
+
+.about-the-brand-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.about-the-brand-image img {
+  border-radius: 50%;
+  margin-left: 0.2vh;
+  margin-right: 0.2vh;
+  max-width: 27vh;
+  padding-bottom:2vh;
+}
+
+.first-row {
+  padding-top: 11vh;
+  padding-bottom: 2vh;
+}
+
+.second-row {
+  padding-top: 2vh;
+  padding-bottom: 5vh;
+}
+
+.about-the-brand-circular-image-text {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 22px!important;
+  font-weight: 400;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.10);
+}
+
+.about-the-brand-text-block {
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+  max-width: 1430px;
+  margin: 0 auto;
+}
+
+.about-the-brand-text-block > h2 {
+  font-size: 30px;
+  text-transform: lowercase;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.10);
+  margin-top: 2em;
+}
+
 @media screen and (min-width: 2048px) {
   .about-the-fit-header-image img {
     width: 2800px;
+  }
+  .about-the-brand-header-image img {
+      width: 2800px;
   }
 }
 
@@ -432,7 +542,6 @@ input:invalid, textarea:invalid {
     float:right;
     padding-left:10px;
     padding-right:10px;
-    font-size: 12px;
   }
 }
 
